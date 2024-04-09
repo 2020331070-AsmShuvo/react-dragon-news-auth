@@ -4,8 +4,10 @@ import moment from 'moment/moment';
 
 const Header = () => {
     return (
-        <div className='text-4xl font-bold border text-center'>
+        <div className='text-4xl font-bold space-y-2 text-center'>
+           <div className='flex items-center justify-center'>
            <img src={logo} />
+           </div>
            <p>Journalism without Fear or Favour</p>
            <p className='text-xl'>
             {

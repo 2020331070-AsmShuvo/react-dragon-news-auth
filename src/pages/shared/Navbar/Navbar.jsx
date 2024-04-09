@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-import userDefaultPic from '../../../assets/user.png'
+import userDefaultPic from "../../../assets/user.png";
+import { AuthContext } from "../../../Providers/AuthProvider";
+
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    logOut().then().catch();
+  };
+
   const navLinks = (
     <>
       <li>
@@ -43,16 +51,31 @@ const Navbar = () => {
               {navLinks}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <a className="btn btn-ghost text-xl"></a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {navLinks}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{navLinks}</ul>
         </div>
         <div className="navbar-end flex items-center gap-2">
-            <img src={userDefaultPic} alt="profile" className="w-10 border border-black rounded-full"/>
-          <Link to="/login" className="btn bg-red-700 text-white font-semibold border-none outline-none" >Login</Link>
+          <img
+            src={userDefaultPic}
+            alt="profile"
+            className="w-10 border border-black rounded-full"
+          />
+          {user ? (
+            <button
+              onClick={handleSignOut}
+              className="btn bg-red-700 text-white font-semibold border-none outline-none"
+            >
+              SIGN OUT
+            </button>
+          ) : (
+            <Link to="/login">
+              <button className="btn bg-red-700 text-white font-semibold border-none outline-none">
+                LOGIN
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </div>
